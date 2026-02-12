@@ -1,0 +1,63 @@
+*{
+    font-family: arial;
+    color: white;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.topo {
+    background-color: #30302f;
+    height: 50px;
+}
+
+.interior {
+    margin: auto;
+    width: 80%;
+}
+
+.logomarca {
+    line-height: 50px;
+    font-size: 24px;
+    float:left; 
+}
+
+.menu {
+    float: right;
+}
+
+.menu ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;    
+}
+
+li {
+    line-height: 50px;
+    padding: 0 10px;
+    font-size: 14px;
+    float: right;
+}
+
+.banner {
+    background-color: #347aba;
+    height: 300px;
+}
+
+.banner-interior {
+    width: 80%;
+    margin: auto;
+}
+
+.banner-direita {
+    float: right;
+}
+
+.frase1 {
+    font-size: 48px;
+}
+
+
+
