@@ -1,0 +1,38 @@
+PWIII 25/02
+===========
+
+O PHP é uma linguagem de programacao client/server.
+Isso significa que todo o processamento de dados se dá no lado do servidor.
+E o resultado é enviado geralmente via html.
+O lado servidor (PHP): quando um site é acessado, o servidor Apache interpreta o arquivo PHP, executa os scripts, consulta o banco de dados (com o MySQL) e gera o conteudo.
+O lado cliente (browser): o navegador recebe apenas HTML, CSS e JavaScript prontos, processando-os para exibicao de tela.
+
+Fluxo:
+====
+O cliente digita o endereco la na URL, e o navegador envia uma requisicao para o servidor.
+O servidor processa o PHP, busca o nom edo usuario no banco de dados e devolve para o cliente.
+Como o PHP precisa de um servidor e tambem do Apache, o XAMPP emula esse servidor e ja traz o Apache embarcado. 
+Por isso todo projeto PHP tem que estar na pasta c:\xampp\htdocs. Essa é a pasta que emula um servidor de internet no XAMPP.
+Entao para criar um projeto PHP, a primeira coisa é criar uma pasta dentro de c:\xampp\htdocs, por exemplo uma pasta chamada login.
+No computador o endereco é	c:\xampp\htdocs\login
+No navegador o endereco é	localhost/login
+Ou seja, para rodar um script PHP, digitamos localhost/nome_da_pasta dentro de c:\xampp\htdocs - Se houver um arquivo index.php ou index.html ele ja vai rodar automaticamente. Se nao houver um arquivo index, basta colocar o nome dele apos o nome da pasta. ou escolher na pasta o nome.
+Em um sistema de login, precisamos garantir que o usuario que esta acessando seja ele mesmo. Ou seja, que ninguem consiga digitar o endereco na URL e acessar sem ter passado pelo login.
+Por exemplo, eu tenho um script rodando nesse endereco: localhost/login/home.php, e outra pessoa em outro computador copia esse endereco, tenho que garantir que essa pessoa nao consiga entrar, mesmo digitando o mesmo endereco.
+Para isso usamos as sessoes do PHP. Uma sessao PHP é uma forma de armazenar informacoes (variaveis) no servidor para serem usadas entre as varias paginas de um site, de forma segura pois está no servidor.
+Exemplo:
+
+session_start();
+   $_SESSION[ "nome"] = "Fabio";
+   header("Location:pagina2.php");
+exit();
+
+Ao acessar esse site, o script salva o nome Fabio na variavel de sessao $_SESSION["nome"].
+Depois o usuario é direcionado para a pagina2.html
+Nessa pagina o que fazemos é checar se existe uma session com o nome Fabio. Se existir significa que o usuario passou pelo login, caso contrario podemos exibir uma mensagem e redirecionar para fazer login:
+
+if( isset( $_SESSION["nome"] ) ){
+   echo "O nome salvo na sessao é ".$_SESSION["nome"];
+else{
+    echo "Não há nome salvo na sessao";
+}
