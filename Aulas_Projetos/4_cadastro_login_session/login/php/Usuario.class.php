@@ -37,7 +37,7 @@ class Usuario{
     }
 
     function conectar(){
-        $banco   = "mysql:dbname=login;host=localhost";
+        $banco   = "mysql:dbname=banco;host=localhost";
         $usuario = "root";
         $senha   = "";
 
@@ -49,19 +49,19 @@ class Usuario{
         }
     }
 
-    function insertUser($nome, $email, $senha){
-        $sql  = "INSERT INTO usuarios SET nome = :n, email = :e, senha = :s";
+    function inserirUsuario($nome, $email, $senha){
+        $sql  = "INSERT INTO usuario SET nome = :n, email = :e, senha = :s";
         $stmt = $this->pdo->prepare($sql);
         
         $stmt->bindValue(":n", $nome);
         $stmt->bindValue(":e", $email);
-        $stmt->bindValue(":s", $senha);
+        $stmt->bindValue(":s", md5($senha));
         
         return $stmt->execute();  
     }
 
-    function checkUser($email){
-        $sql = "SELECT email FROM usuarios WHERE email= :e";
+    function checkUsuario($email){
+        $sql = "SELECT email FROM usuario WHERE email= :e";
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->bindValue(":e", $email);
@@ -71,15 +71,30 @@ class Usuario{
         return $stmt->rowCount() > 0;
     }
 
-    function checkPass($email, $senha){
-        $sql = "SELECT email FROM usuarios WHERE email= :e AND senha= :s";
+    function checkSenha($email, $senha){
+        $sql = "SELECT email FROM usuario WHERE email= :e AND senha= :s";
         $stmt = $this->pdo->prepare($sql);
 
         $stmt->bindValue(":e", $email);
-        $stmt->bindValue(":s", $senha);
+        $stmt->bindValue(":s", md5($senha));
 
         $stmt->execute();
 
         return $stmt->rowCount() > 0;
+    }
+
+    // função que pega o nome do usuario para mostrar no login
+    function buscarNome($email) {
+        $sql = "SELECT nome FROM usuario WHERE email = :e";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindValue(":e", $email);
+        $stmt->execute();
+
+        $nome = null;
+
+        $row = $stmt->fetch();
+        $nome = $row['nome'];
+        return $nome;
     }
 }

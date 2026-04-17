@@ -20,10 +20,22 @@
 
                     <input type="password" placeholder="Senha:" name="senha" required="true" minlength="3" maxlength="8">
 
+                    <?php
+                        if (isset($_GET['msg'])) {
+                            echo "<p style='color: red;'>" . htmlspecialchars($_GET['msg']) . "</p>";
+                        }
+                    ?>
+
+                    <?php
+                        if (isset($_GET['msgOk'])) {
+                            echo "<p style='color: green;'>" . htmlspecialchars($_GET['msgOk']) . "</p>";
+                        }
+                    ?>
+                    
                     <!--adicionando botão que irá enviar as informações do site -->
                     <input type="submit" value="Entrar">
                 </form>
-                <a href="./html/cadastroUsuario.html">Não tem Cadastro? Clique aqui</a>
+                <a href="./views/cadastroUsuario.php">Não tem Cadastro? <span>Clique aqui</span></a>
             </div>
         </div>
     </body>

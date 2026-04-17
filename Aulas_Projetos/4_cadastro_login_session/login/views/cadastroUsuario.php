@@ -18,8 +18,15 @@
                     <input type="text"     placeholder="Email:"   name = "email"   required="true" minlength="3" maxlength="100">
                     <input type="password" placeholder="Senha:"   name = "senha"   required="true" minlength="3" maxlength="8">
 
+                    <?php
+                        if (isset($_GET['msg'])) {
+                            echo "<p style='color: red;'>" . htmlspecialchars($_GET['msg']) . "</p>";
+                        }
+                    ?>
+                    
                     <input type="submit" value="Cadastrar">
                 </form>             
+                <a href="../index.php">Já tem conta? <span>Clique aqui</span></a>
             </div>
         </div>
     </body>
