@@ -3,7 +3,6 @@
         <!--Serve par setar o UNICODE do site para o usado em PT-BR-->
         <meta charset="UTF-8"/> 
         <title>Tela de Login</title>
-        <title>Seja bem-vindo</title>
         
         <!--vinculando a tela, com o CSS para estilizar a página-->
         <link rel="stylesheet" type="text/css" href="../css/index.css">

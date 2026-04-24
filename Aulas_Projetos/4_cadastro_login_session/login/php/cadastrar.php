@@ -5,7 +5,7 @@ require 'Usuario.class.php';
 if( isset( $_POST['email'])){
     $nome  = addslashes( $_POST['nome'] );
     $email = addslashes( $_POST['email'] );
-    $senha = md5( addslashes($_POST['senha'] ) );
+    $senha = md5( addslashes($_POST['senha'] ));
 
     $usuario = new Usuario();
  

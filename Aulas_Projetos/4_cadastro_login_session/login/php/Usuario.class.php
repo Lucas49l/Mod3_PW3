@@ -7,19 +7,19 @@ class Usuario{
     private $pdo;
 
     # os getters simplesmente retornam o valor dos atributos da classe.
-    function getId(){
+    public function getId(){
         return $this->id;
     }
 
-    function getEmail(){
+    public function getEmail(){
         return $this->email;
     }
 
-    function getSenha(){
+    public function getSenha(){
         return $this->senha;
     }
 
-    function getNome(){
+    public function getNome(){
         return $this->nome;
     }
 
@@ -36,7 +36,9 @@ class Usuario{
         $this->senha = $senha;
     }
 
-    function conectar(){
+    
+    // Conexão com o banco de dados
+    public function conectar(){
         $banco   = "mysql:dbname=banco;host=localhost";
         $usuario = "root";
         $senha   = "";
@@ -49,7 +51,8 @@ class Usuario{
         }
     }
 
-    function inserirUsuario($nome, $email, $senha){
+    // Cadastrar usuário
+    public function inserirUsuario($nome, $email, $senha){
         $sql  = "INSERT INTO usuario SET nome = :n, email = :e, senha = :s";
         $stmt = $this->pdo->prepare($sql);
         
@@ -60,7 +63,8 @@ class Usuario{
         return $stmt->execute();  
     }
 
-    function checkUsuario($email){
+    // Checar se o usuário existe no banco
+    public function checkUsuario($email){
         $sql = "SELECT email FROM usuario WHERE email= :e";
         $stmt = $this->pdo->prepare($sql);
 
@@ -71,7 +75,8 @@ class Usuario{
         return $stmt->rowCount() > 0;
     }
 
-    function checkSenha($email, $senha){
+    // Autenticar senha
+    public function checkSenha($email, $senha){
         $sql = "SELECT email FROM usuario WHERE email= :e AND senha= :s";
         $stmt = $this->pdo->prepare($sql);
 
@@ -83,8 +88,8 @@ class Usuario{
         return $stmt->rowCount() > 0;
     }
 
-    // função que pega o nome do usuario para mostrar no login
-    function buscarNome($email) {
+    // Buscar nome do usuário
+    public function buscarNome($email) {
         $sql = "SELECT nome FROM usuario WHERE email = :e";
         $stmt = $this->pdo->prepare($sql);
 
@@ -96,5 +101,52 @@ class Usuario{
         $row = $stmt->fetch();
         $nome = $row['nome'];
         return $nome;
+    }
+
+    // Listar todos os usuarios existentes no banco
+    public function listarUsuarios(){
+        $sql = "SELECT * FROM usuario";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            return $stmt->fetchAll(); // o fetchAll retorna array com todos os usuarios encontrados
+        }else{
+            return Array();
+        }
+    }
+
+    // Atualizar dados do usuário 
+    public function alterarUsuario($id, $nome, $email){
+        $sql = "ALTER TABLE usuario SET nome=:n, email=:e WHERE id=:i";
+        $stmt = $this->pdo->prepare($sql);
+        
+        $stmt->bindValue("i", $id);
+        $stmt->bindValue("n", $nome);
+        $stmt->bindValue("e", $email);
+
+        $stmt->execute();
+
+        return $stmt->fecth(); // retorna um registro
+
+    }
+
+    // Atualizar senha do usuário
+    public function alterarSenha($id, $senha){
+        $sql = "ALTER TABLE usuario SET senha=s: WHERE id=:i";
+        $stmt = $this->pdo->prepare($sql);
+        
+        $stmt->bindValue("i", $id);
+        $stmt->bindValue("s", $senha);
+
+        return $stmt->execute();
+    }
+
+    // Deletar registro do usuário no banco
+    public function deletarUsuario($id){
+        $sql = "SELECT FROM usuario WHERE id=:i";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':i', $id);
+        return $stmt->execute();
     }
 }
