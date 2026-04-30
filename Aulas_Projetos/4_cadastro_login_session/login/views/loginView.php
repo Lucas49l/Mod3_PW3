@@ -34,7 +34,7 @@
                     <!--adicionando botão que irá enviar as informações do site -->
                     <input type="submit" value="Entrar">
                 </form>
-                <a href="./views/cadastroView.php">Não tem Cadastro? <span>Clique aqui</span></a>
+                <a href="/modular/login/cadastro">Não tem Cadastro? <span>Clique aqui</span></a>
             </div>
         </div>
     </body>
