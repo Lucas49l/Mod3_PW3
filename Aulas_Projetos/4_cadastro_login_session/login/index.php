@@ -14,6 +14,7 @@
             <!-- aqui é o espaço onde vamos criar o formulário-->
             <div class="formulario">
                 <form action="./php/login.php" method="post">
+                    <h2>Login Usuário</h2>
                     <!-- adicionando campos do formulário-->
                     <input type="text" placeholder="E-mail:" name="email" required="true" minlength="3" maxlength="200">
 
@@ -35,7 +36,12 @@
                     <input type="submit" value="Entrar">
                 </form>
                 <a href="./views/cadastroView.php">Não tem Cadastro? <span>Clique aqui</span></a>
+                <div class="tabela">
+                    <Button><a href="./views/tabelaView.php"><span>Tabela</span></a></Button>
+                </div>
             </div>
+            
+            
         </div>
     </body>
 </html>

@@ -103,6 +103,20 @@ class Usuario{
         return $nome;
     }
 
+    public function buscarID($id) {
+        $sql = "SELECT * FROM usuario WHERE $id = :i";
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->bindValue(":i", $$id);
+        $stmt->execute();
+
+        $usuario = null;
+
+        $row = $stmt->fetch();
+        $usuario = $row['nome'];
+        return $usuario;
+    }
+
     // Listar todos os usuarios existentes no banco
     public function listarUsuarios(){
         $sql = "SELECT * FROM usuario";
@@ -116,32 +130,37 @@ class Usuario{
         }
     }
 
-    // Atualizar dados do usuário 
-    public function alterarUsuario($id, $nome, $email){
-        $sql = "ALTER TABLE usuario SET nome=:n, email=:e WHERE id=:i";
+    // FUNÇÕES DE SELECT 
+    public function listarUsuario($id){
+        $sql = "SELECT * FROM usuario WHERE id=:i";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue("i", $id);
+
+        $stmt->execute();
+
+        if($stmt->rowCount() > 0){
+            return $stmt->fetch();
+        }else{
+            return Array();
+        }
+    }
+
+    // FUNÇOES DE UPDATE
+    public function alterarUsuario($id, $nome, $email, $senha){
+        $sql = "ALTER TABLE usuario SET nome=:n, email=:e, senha=:s WHERE id=:i";
         $stmt = $this->pdo->prepare($sql);
         
         $stmt->bindValue("i", $id);
         $stmt->bindValue("n", $nome);
         $stmt->bindValue("e", $email);
+        $stmt->bindValue("s", $senha);
 
         $stmt->execute();
 
         return $stmt->fecth(); // retorna um registro
 
     }
-
-    // Atualizar senha do usuário
-    public function alterarSenha($id, $senha){
-        $sql = "ALTER TABLE usuario SET senha=s: WHERE id=:i";
-        $stmt = $this->pdo->prepare($sql);
-        
-        $stmt->bindValue("i", $id);
-        $stmt->bindValue("s", $senha);
-
-        return $stmt->execute();
-    }
-
+    
     // Deletar registro do usuário no banco
     public function deletarUsuario($id){
         $sql = "SELECT FROM usuario WHERE id=:i";
@@ -150,3 +169,5 @@ class Usuario{
         return $stmt->execute();
     }
 }
+
+?>

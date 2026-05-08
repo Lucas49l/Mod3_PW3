@@ -12,6 +12,7 @@
         <!--Essa div, representa onde todo o conteúdo do site vai ficar-->
         <div class="container-principal">
             <div class="formulario">
+                <h2>cadastrar Usuário</h2>
                 <form method="post" action="../php/cadastrar.php">
                     <input type="text"     placeholder="Usuário:" name = "nome" required="true" minlength="3" maxlength="30">
                     <input type="text"     placeholder="Email:"   name = "email"   required="true" minlength="3" maxlength="100">

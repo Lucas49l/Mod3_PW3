@@ -36,6 +36,7 @@
                         $table .= "<th> Código </th>";
                         $table .= "<th> Nome </th>";
                         $table .= "<th> E-mail </th>"; 
+                        $table .= "<th> Ações </th>"; 
 
                     $table .= "</tr>";
                     $table .= "<tbody>";
@@ -45,12 +46,12 @@
                             $email = $row['email'];
                             
                             $table .= "<tr>";            
-                            $table .= "<td> <input type='checkbox' value='id'</td>";            
+                            $table .= "<td> <input type='checkbox' value='$id'</td>";            
                             $table .= "<td> $id </td>";
                             $table .= "<td> $nome </td>";
                             $table .= "<td> $email </td>";
-                            $table .= "<td> <a class = 'btn btn-info' href='editar.php?id'>Editar</a> </td>"; 
-                            $table .= "<td> <a class = 'btn btn-danger' href='deletar.php?id'>Excluir</a> </td>";
+                            $table .= "<td> <a class = 'btn btn-info' href='../views/editar.php?id={$id}'>Editar</a> </td>"; 
+                            $table .= "<td> <a class = 'btn btn-danger' href='../views/deletar.php?id={$id}'>Excluir</a> </td>";
                             $table .= "</tr>";
                     }
                     $table .= "</tbody>";
